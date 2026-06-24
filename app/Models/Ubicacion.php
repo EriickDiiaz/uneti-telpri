@@ -12,4 +12,9 @@ class Ubicacion extends Model
         'nombre',
         'descripcion',
     ];
+
+    public function lineas()
+    {
+        return $this->hasMany(Linea::class);
+    }
 }

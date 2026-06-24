@@ -9,4 +9,9 @@ class Plataforma extends Model
     protected $fillable =[
         'nombre',
     ];
+
+    public function lineas()
+    {
+        return $this->hasMany(Linea::class);
+    }
 }

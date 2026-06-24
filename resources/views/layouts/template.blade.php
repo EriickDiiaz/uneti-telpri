@@ -44,7 +44,7 @@
                             <i class="fa-solid fa-ethernet m-2"></i>Adm. de Ubicaciones
                         </a>
                         <a class="btn btn-gradient-outline btn-sm text-start" href="{{ url('/localidades') }}">
-                            <i class="fa-solid fa-location-dot m-2"></i>Adm. de Localidades
+                            <i class="fa-regular fa-building m-2"></i>Adm. de Localidades
                         </a>
                         <a class="btn btn-gradient-outline btn-sm text-start" href="{{ url('/usuarios') }}">
                             <i class="fa-solid fa-person m-2"></i>Adm. de Usuarios
