@@ -1,6 +1,6 @@
 @extends('layouts.template')
 
-@section('title','Plataformas - Modificar Plataforma')
+@section('title','Ubicaciones - Crear')
 @section('contenido')
 
 <!-- Mensajes y Notificaciones -->
@@ -19,33 +19,34 @@
 
 <!-- Titulo de la Sección -->
 <div class="d-flex">    
-    <h2><i class="fa-solid fa-tower-cell m-2"></i>Modificar Plataforma.</h2>
+    <h2><i class="fa-solid fa-ethernet m-2"></i>Crear Ubicación.</h2>
 </div>
 
 <!--Contenido de la Sección -->
-<form action="{{ route('plataformas.update', $plataforma) }}" method="POST">
+<form action="{{ url('ubicaciones') }}" method="post">
     @csrf
-    @method('PUT')
+    <label for="nombre" class="col-sm-2 col-form-label">Nombre de ubicación:</label>
+    <div class="col-sm-5">
+        <input type="text" class="form-control" name="nombre" id="nombre" value="{{ old('nombre') }}" required>
+    </div>
 
-    <div>
-        <label for="nombre" class="col-sm-2 col-form-label">Nombre de plataforma:</label>
-        <div class="col-sm-5">
-            <input type="text" class="form-control" name="nombre" id="nombre" value="{{ $plataforma->nombre }}" required>
-        </div>
+    <label for="descripcion" class="col-sm-2 col-form-label">Descripción de ubicación:</label>
+    <div class="col-sm-5">
+        <input type="text" class="form-control" name="descripcion" id="descripcion" value="{{ old('descripcion') }}">
     </div>
 
     <div class="mt-3 d-flex justify-content-between col-5">
-        <a href="{{ url('plataformas/')}}" class="btn btn-outline-danger btn-sm">
+        <a href="{{ url('ubicaciones/')}}" class="btn btn-outline-danger btn-sm">
             <span>
                 <i class="fa-solid fa-delete-left m-2"></i>Regresar
             </span>
         </a>
-        <button type="submit" class="btn btn-outline-primary btn-sm">
+        <button type="submit" class="btn btn-outline-success btn-sm">
             <span>
-                <i class="fa-solid fa-check m-2"></i>Actualizar Plataforma
+                <i class="fa-solid fa-plus m-2"></i>Agregar Ubicación
             </span>
         </button>
-    </div>      
+    </div>                
 </form>
 
 @endsection

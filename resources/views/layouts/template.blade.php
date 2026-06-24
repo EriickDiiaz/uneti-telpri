@@ -40,6 +40,9 @@
                         <a class="btn btn-gradient-outline btn-sm text-start" href="{{ url('/plataformas') }}">
                             <i class="fa-solid fa-tower-cell m-2"></i>Adm. de Plataformas
                         </a>
+                        <a class="btn btn-gradient-outline btn-sm text-start" href="{{ url('/ubicaciones') }}">
+                            <i class="fa-solid fa-ethernet m-2"></i>Adm. de Ubicaciones
+                        </a>
                         <a class="btn btn-gradient-outline btn-sm text-start" href="{{ url('/localidades') }}">
                             <i class="fa-solid fa-location-dot m-2"></i>Adm. de Localidades
                         </a>
