@@ -19,7 +19,6 @@
 </head>
 
 <body>
-
     <div class="container-fluid">
         <div class="row">
             <!-- Sidebar -->
@@ -45,6 +44,9 @@
                         </a>
                         <a class="btn btn-gradient-outline btn-sm text-start" href="{{ url('/localidades') }}">
                             <i class="fa-regular fa-building m-2"></i>Adm. de Localidades
+                        </a>
+                        <a class="btn btn-gradient-outline btn-sm text-start" href="{{ url('/pisos') }}">
+                            <i class="fa-solid fa-elevator m-2"></i>Adm. de Pisos
                         </a>
                         <a class="btn btn-gradient-outline btn-sm text-start" href="{{ url('/usuarios') }}">
                             <i class="fa-solid fa-person m-2"></i>Adm. de Usuarios
@@ -174,6 +176,5 @@
     </script>
 
     @stack('scripts')
-
 </body>
 </html>

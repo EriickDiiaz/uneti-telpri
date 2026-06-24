@@ -9,7 +9,7 @@ class LocalidadController extends Controller
 {
     public function index()
     {
-        $localidades = Localidad::all();
+        $localidades = Localidad::withCount('pisos')->get();
 
         return view('localidades.index', compact('localidades'));
     }
@@ -30,6 +30,13 @@ class LocalidadController extends Controller
     public function edit(Localidad $localidad)
     {
         return view('localidades.edit', compact('localidad'));
+    }
+
+    public function show(Localidad $localidad)
+    {
+        $localidad->load('pisos');
+
+        return view('localidades.show', compact('localidad'));
     }
 
     public function update(Request $request, Localidad $localidad)
