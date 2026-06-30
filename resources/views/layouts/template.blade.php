@@ -27,7 +27,7 @@
                     <div class="d-grid gap-2 col-12 mx-auto">
                         <a class="navbar-brand d-flex flex-column align-items-start" href="{{ url('/home') }}" style="height: 70px;">
                             <div class="d-flex align-items-end h-100">
-                                <img src="{{ asset('imagenes/Logo_TelPriWeb_Wh.png') }}" alt="Logo TelPri" style="width: 100%; max-height: 60px;" class="m-2 pt-2">
+                                <img src="{{ asset('imagenes/logo_telpri.png') }}" alt="Logo TelPri" class="img-fluid logo-sidebar" style="height: 50px;">
                                 <small class="text-white ms-2 align-self-end">V1.8</small>
                             </div>
                         </a>
@@ -45,9 +45,11 @@
                         <a class="btn btn-gradient-outline btn-sm text-start" href="{{ url('/localidades') }}">
                             <i class="fa-regular fa-building m-2"></i>Adm. de Localidades
                         </a>
+                        <!--
                         <a class="btn btn-gradient-outline btn-sm text-start" href="{{ url('/pisos') }}">
                             <i class="fa-solid fa-elevator m-2"></i>Adm. de Pisos
                         </a>
+                        -->
                         <a class="btn btn-gradient-outline btn-sm text-start" href="{{ url('/usuarios') }}">
                             <i class="fa-solid fa-person m-2"></i>Adm. de Usuarios
                         </a>

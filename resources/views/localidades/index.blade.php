@@ -30,12 +30,14 @@
 </div>
 
 <!-- Resumen de Localidades -->
+<div class="d-flex mb-2">
     <div class="align-items-center me-2">
         <button class="btn btn-outline-primary">
             Total Localidades:
             <span class="badge bg-primary">{{ $localidades->count() }}</span>
         </button>
     </div>
+</div>
 
 <!-- Contenido de Sección -->
 <table class="table table-striped" id="datatableLocalidades">
