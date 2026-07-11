@@ -22,12 +22,10 @@ class PisoController extends Controller
 
     public function store(Request $request)
     {
-        {
         $validatedData = $this->validatePiso($request);
         $piso = Piso::create($validatedData);
 
         return redirect()->route('localidades.show', $piso->localidad_id)->with('mensaje', 'Piso agregado con éxito.');
-    }
     }
 
     public function edit(Piso $piso)

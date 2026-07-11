@@ -147,7 +147,7 @@
                         titleAttr: 'Exportar a Excel',
                         className: 'btn btn-outline-primary',
                         exportOptions: {
-                            columns: ':visible' // Exportar todas las columnas visibles
+                            columns: ':visible'
                         }
                     },
                     {
@@ -156,7 +156,7 @@
                         titleAttr: 'Exportar a PDF',
                         className: 'btn btn-outline-primary',
                         exportOptions: {
-                            columns: ':visible' // Exportar todas las columnas visibles
+                            columns: ':visible'
                         }
                     },
                     {
@@ -165,7 +165,7 @@
                         titleAttr: 'Imprimir',
                         className: 'btn btn-outline-primary',
                         exportOptions: {
-                            columns: ':visible' // Exportar todas las columnas visibles
+                            columns: ':visible'
                         }
                     }
                 ]
@@ -173,8 +173,6 @@
             const mergedOptions = {...defaultOptions, ...options};
             $(tableId).DataTable(mergedOptions);
         }
-
-        // SweetAlert2: no forzamos tema oscuro, usamos tema por defecto
     </script>
 
     @stack('scripts')
