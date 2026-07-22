@@ -10,17 +10,20 @@ use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
+Route::middleware('auth')->group(function () {
+    Route::get('/', function () {
+        return view('welcome');
+    });
+
+    Route::resource('/plataformas', PlataformaController::class);
+    Route::resource('/usuarios', UsuarioController::class);
+    Route::resource('/ubicaciones', UbicacionController::class)->parameters(['ubicaciones' => 'ubicacion']);
+    Route::resource('/localidades', LocalidadController::class)->parameters(['localidades' => 'localidad']);
+    Route::resource('/pisos', PisoController::class)->parameters(['pisos' => 'piso']);
+    Route::resource('/roles', RolController::class);
+    Route::resource('/permisos', PermisoController::class);
+
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 });
 
-Route::resource('/plataformas', PlataformaController::class);
-Route::resource('/usuarios', UsuarioController::class);
-Route::resource('/ubicaciones', UbicacionController::class)->parameters(['ubicaciones' => 'ubicacion']);
-Route::resource('/localidades', LocalidadController::class)->parameters(['localidades' => 'localidad']);
-Route::resource('/pisos', PisoController::class)->parameters(['pisos' => 'piso']);
-Route::resource('/roles', RolController::class);
-Route::resource('/permisos', PermisoController::class);
 Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
