@@ -34,9 +34,6 @@
         </div>
     </div>
 
-
-
-
     <div class="mb-2">
         <label for="email" class="col-sm-2 col-form-label">Usuario:</label>
         <div class="col-sm-5">
@@ -79,11 +76,13 @@
                 <i class="fa-solid fa-delete-left m-2"></i>Regresar
             </span>
         </a>
+        @can('Editar Usuario')
         <button type="submit" class="btn btn-outline-primary btn-sm">
             <span>
-                <i class="fa-solid fa-check m-2"></i>Actualizar Plataforma
+                <i class="fa-solid fa-check m-2"></i>Actualizar Usuario
             </span>
         </button>
+        @endcan
     </div>      
 </form>
 

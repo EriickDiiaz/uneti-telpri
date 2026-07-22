@@ -20,6 +20,10 @@ class RolesPermisosSeeder extends Seeder
         Permission::create(['name' => 'Editar Lineas']);
         Permission::create(['name' => 'Eliminar Lineas']);
         Permission::create(['name' => 'Ver Lineas']);
+        Permission::create(['name' => 'Menu Plataformas']);
+        Permission::create(['name' => 'Crear Plataformas']);
+        Permission::create(['name' => 'Editar Plataformas']);
+        Permission::create(['name' => 'Eliminar Plataformas']);
         Permission::create(['name' => 'Menu Ubicaciones']);
         Permission::create(['name' => 'Crear Ubicaciones']);
         Permission::create(['name' => 'Editar Ubicaciones']);

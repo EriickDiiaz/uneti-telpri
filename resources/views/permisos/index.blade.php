@@ -19,11 +19,12 @@
 
 <!-- Botones -->
 <div class="d-flex justify-content-between mb-2">
-    <div>
-        <a href="{{ route('permisos.create') }}" class="btn btn-outline-success btn-sm">
-            <i class="fa-solid fa-plus m-2"></i>Agregar Permiso
-        </a>
-    </div>
+    @can('Crear Permisos')
+    <a href="{{ route('permisos.create') }}" class="btn btn-outline-success btn-sm">
+        <i class="fa-solid fa-plus m-2"></i>Agregar Permiso
+    </a>
+    @endcan
+
 </div>
 
 <!-- Resumen de Permisos -->
@@ -57,9 +58,12 @@
                 @endforeach
             </td>
             <td>
+                @can('Editar Permisos')
                 <a href="{{ route('permisos.edit', $permiso->id) }}" class="btn btn-outline-primary btn-sm">
                     <i class="fa-solid fa-pen-to-square"></i>
                 </a>
+                @endcan
+                @can('Eliminar Permisos')
                 <form action="{{ route('permisos.destroy', $permiso->id) }}" id="form-eliminar-{{ $permiso->id }}" class="d-inline" method="POST">
                     @csrf
                     @method('DELETE')
@@ -67,6 +71,7 @@
                         <i class="fa-solid fa-xmark"></i>
                     </button>
                 </form>
+                @endcan
             </td>
         </tr>
         @endforeach

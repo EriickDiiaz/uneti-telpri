@@ -23,9 +23,11 @@
         <a href="{{ route('localidades.index') }}" class="btn btn-outline-danger">
             <i class="fa-solid fa-arrow-left"></i> Volver a Localidades
         </a>
+        @can('Crear Pisos')
         <a href="{{ route('pisos.create') }}" class="btn btn-outline-success btn-sm me-2">
             <i class="fa-solid fa-plus m-2"></i>Agregar Piso
         </a>
+        @endcan
     </div>
 </div>
 
@@ -49,9 +51,12 @@
             <td>{{ $piso->id }}</td>
             <td>{{ $piso->nombre }}</td>
             <td>
+                @can('Editar Pisos')
                 <a href="{{ route('pisos.edit', $piso->id) }}" class="btn btn-outline-primary btn-sm">
                     <i class="fa-solid fa-pen-to-square"></i>
                 </a>
+                @endcan
+                @can('Eliminar Pisos')
                 <form action="{{ route('pisos.destroy', $piso->id) }}" id="form-eliminar-{{ $piso->id }}" class="d-inline" method="POST">
                     @csrf
                     @method('DELETE')
@@ -59,6 +64,7 @@
                         <i class="fa-solid fa-xmark"></i>
                     </button>
                 </form>
+                @endcan
             </td>
         </tr>
         @empty

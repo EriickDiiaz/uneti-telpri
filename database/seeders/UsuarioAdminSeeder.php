@@ -18,5 +18,29 @@ class UsuarioAdminSeeder extends Seeder
         ]);
 
         $admin->assignRole('Administrador');
+
+        $supervisor = User::create([
+            'name' => 'Supervisor',
+            'email' => 'supervisor',
+            'password' => Hash::make('password123'),
+        ]);
+
+        $supervisor->assignRole('Supervisor');
+
+        $tecnico = User::create([
+            'name' => 'Técnico',
+            'email' => 'tecnico',
+            'password' => Hash::make('password123'),
+        ]);
+
+        $tecnico->assignRole('Tecnico');
+
+        $invitado = User::create([
+            'name' => 'Invitado',
+            'email' => 'invitado',
+            'password' => Hash::make('password123'),
+        ]);
+
+        $invitado->assignRole('Invitado');
     }
 }

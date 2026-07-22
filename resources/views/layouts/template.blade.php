@@ -30,28 +30,39 @@
                                 <img src="{{ asset('imagenes/logo_telpri.png') }}" alt="Logo TelPri" class="img-fluid logo-sidebar" style="height: 50px;">
                             </div>
                         </a>
+                        @can('Menu Lineas')
                         <div class="border-top my-2 nav-item"></div>
                         <a class="btn btn-primary" href="{{ url('/lineas') }}">
                             <i class="fa-solid fa-phone me-2"></i>Líneas
                         </a>
+                        @endcan
+                        @can('Menu Plataformas')
                         <div class="border-top my-2 nav-item"></div>  
                         <a class="btn btn-primary text-center" href="{{ url('/plataformas') }}">
                             <i class="fa-solid fa-tower-cell me-2"></i>Adm. de Plataformas
                         </a>
+                        @endcan
+                        @can('Menu Ubicaciones')
                         <a class="btn btn-primary text-center" href="{{ url('/ubicaciones') }}">
                             <i class="fa-solid fa-ethernet me-2"></i>Adm. de Ubicaciones
                         </a>
+                        @endcan
+                        @can('Menu Localidades')
                         <a class="btn btn-primary text-center" href="{{ url('/localidades') }}">
                             <i class="fa-regular fa-building me-2"></i>Adm. de Localidades
                         </a>
+                        @endcan
                         <!--
                         <a class="btn btn-primary text-center" href="{{ url('/pisos') }}">
                             <i class="fa-solid fa-elevator me-2"></i>Adm. de Pisos
                         </a>
                         -->
+                        @can('Menu Usuarios')
                         <a class="btn btn-primary text-center" href="{{ url('/usuarios') }}">
                             <i class="fa-solid fa-person me-2"></i>Adm. de Usuarios
                         </a>
+                        @endcan
+                        @can('Menu Sistema')
                         <div class="border-top my-2 nav-item"></div>                    
                         <a class="btn btn-primary text-center" href="{{ url('/roles') }}">
                             <i class="fa-solid fa-address-card me-2"></i>Adm. de Roles
@@ -60,6 +71,7 @@
                             <i class="fa-solid fa-list-check me-2"></i>Adm. de Permisos
                         </a>
                         <div class="border-top my-2 nav-item"></div>
+                        @endcan
                         @guest
                             <div class="d-grid gap-2">
                                 <a href="{{ route('login') }}" class="btn btn-outline-secondary">

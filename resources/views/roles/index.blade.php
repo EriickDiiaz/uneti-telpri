@@ -18,6 +18,7 @@
 </div>
 
 <!-- Botones -->
+@can('Crear Roles')
 <div class="d-flex justify-content-between mb-2">
     <div>
         <a href="{{ route('roles.create') }}" class="btn btn-outline-success btn-sm">
@@ -25,6 +26,7 @@
         </a>
     </div>
 </div>
+@endcan
 
 <!-- Resumen de Roles -->
 <div class="d-flex mb-2">
@@ -53,9 +55,12 @@
             <td>{{ $rol->name }}</td>
             <td>{{ $rol->permissions_count }}</td>
             <td>
+                @can('Editar Roles')
                 <a href="{{ route('roles.edit', $rol->id) }}" class="btn btn-outline-primary btn-sm">
                     <i class="fa-solid fa-pen-to-square"></i>
                 </a>
+                @endcan
+                @can('Eliminar Roles')
                 <form action="{{ route('roles.destroy', $rol->id) }}" id="form-eliminar-{{ $rol->id }}" class="d-inline" method="POST">
                     @csrf
                     @method('DELETE')
@@ -63,6 +68,7 @@
                         <i class="fa-solid fa-xmark"></i>
                     </button>
                 </form>
+                @endcan
             </td>
         </tr>
         @endforeach

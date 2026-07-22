@@ -61,11 +61,13 @@
                 <i class="fa-solid fa-delete-left m-2"></i>Regresar
             </span>
         </a>
+        @can('Crear Roles')
         <button type="submit" class="btn btn-outline-success btn-sm">
             <span>
                 <i class="fa-solid fa-plus m-2"></i>Agregar Rol
             </span>
         </button>
+        @endcan
     </div>                
 </form>
 

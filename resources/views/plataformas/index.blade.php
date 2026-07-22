@@ -18,6 +18,7 @@
 </div>
 
 <!-- Botones -->
+@can('Crear Plataformas')
 <div class="d-flex justify-content-between mb-2">
     <div>
         <a href="{{ route('plataformas.create') }}" class="btn btn-outline-success btn-sm">
@@ -25,6 +26,7 @@
         </a>
     </div>
 </div>
+@endcan
 
 <!-- Resumen de Plataformas -->
 <div class="d-flex mb-2">
@@ -51,9 +53,12 @@
             <td>{{ $plataforma->id }}</td>
             <td>{{ $plataforma->nombre }}</td>
             <td>
+                @can('Editar Plataformas')
                 <a href="{{ route('plataformas.edit', $plataforma->id) }}" class="btn btn-outline-primary btn-sm">
                     <i class="fa-solid fa-pen-to-square"></i>
                 </a>
+                @endcan
+                @can('Eliminar Plataformas')
                 <form action="{{ route('plataformas.destroy', $plataforma->id) }}" id="form-eliminar-{{ $plataforma->id }}" class="d-inline" method="POST">
                     @csrf
                     @method('DELETE')
@@ -61,6 +66,7 @@
                         <i class="fa-solid fa-xmark"></i>
                     </button>
                 </form>
+                @endcan
             </td>
         </tr>
         @endforeach

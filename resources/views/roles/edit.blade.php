@@ -60,11 +60,13 @@
                 <i class="fa-solid fa-delete-left m-2"></i>Regresar
             </span>
         </a>
+        @can('Editar Roles')
         <button type="submit" class="btn btn-outline-primary btn-sm">
             <span>
                 <i class="fa-solid fa-check m-2"></i>Actualizar Rol
             </span>
         </button>
+        @endcan
     </div>
 </form>
 

@@ -18,6 +18,7 @@
 </div>
 
 <!-- Botones -->
+@can('Crear Usuarios')
 <div class="d-flex justify-content-between mb-2">
     <div>
         <a href="{{ route('usuarios.create') }}" class="btn btn-outline-success btn-sm">
@@ -25,6 +26,7 @@
         </a>
     </div>
 </div>
+@endcan
 
 <!-- Resumen de Usuarios -->
 <div class="d-flex mb-2">
@@ -53,9 +55,12 @@
             <td>{{ $usuario->name }}</td>
             <td>{{ $usuario->email }}</td>
             <td>
+                @can('Editar Usuarios')
                 <a href="{{ route('usuarios.edit', $usuario->id) }}" class="btn btn-outline-primary btn-sm">
                     <i class="fa-solid fa-pen-to-square"></i>
                 </a>
+                @endcan
+                @can('Eliminar Usuarios')
                 <form action="{{ route('usuarios.destroy', $usuario->id) }}" id="form-eliminar-{{ $usuario->id }}" class="d-inline" method="POST">
                     @csrf
                     @method('DELETE')
@@ -63,6 +68,7 @@
                         <i class="fa-solid fa-xmark"></i>
                     </button>
                 </form>
+                @endcan
             </td>
         </tr>
         @endforeach

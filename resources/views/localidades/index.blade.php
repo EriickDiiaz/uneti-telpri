@@ -20,12 +20,16 @@
 <!-- Botones -->
 <div class="d-flex justify-content-between mb-2">
     <div>
+        @can('Crear Localidades')
         <a href="{{ route('localidades.create') }}" class="btn btn-outline-success btn-sm">
             <i class="fa-solid fa-plus m-2"></i>Agregar Localidad
         </a>
+        @endcan
+        @can('Crear Pisos')
         <a href="{{ route('pisos.create') }}" class="btn btn-outline-success btn-sm me-2">
             <i class="fa-solid fa-plus m-2"></i>Agregar Piso
         </a>
+        @endcan
     </div>
 </div>
 
@@ -59,9 +63,12 @@
                 <a href="{{ route('localidades.show', $localidad->id) }}" class="btn btn-outline-dark btn-sm">
                     <i class="fa-solid fa-eye"></i>
                 </a>
+                @can('Editar Localidades')
                 <a href="{{ route('localidades.edit', $localidad->id) }}" class="btn btn-outline-primary btn-sm">
                     <i class="fa-solid fa-pen-to-square"></i>
                 </a>
+                @endcan
+                @can('Eliminar Localidades')
                 <form action="{{ route('localidades.destroy', $localidad->id) }}" id="form-eliminar-{{ $localidad->id }}" class="d-inline" method="POST">
                     @csrf
                     @method('DELETE')
@@ -69,6 +76,7 @@
                         <i class="fa-solid fa-xmark"></i>
                     </button>
                 </form>
+                @endcan
             </td>
         </tr>
         @endforeach
