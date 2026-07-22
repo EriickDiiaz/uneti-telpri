@@ -40,6 +40,12 @@ class PermisoController extends Controller
         return redirect()->route('permisos.index')->with('mensaje', 'Permiso actualizado con éxito.');
     }
 
+    public function destroy(Permission $permiso)
+    {
+        $permiso->delete();
+        return redirect()->route('permisos.index')->with('mensaje', 'Permiso eliminado con éxito.');
+    }
+
     protected function validatePermiso(Request $request, $id = null)
     {
         return $request->validate([
