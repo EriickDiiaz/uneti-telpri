@@ -32,38 +32,37 @@
                         </a>
                         <div class="border-top my-2 nav-item"></div>
                         <a class="btn btn-primary" href="{{ url('/lineas') }}">
-                            <i class="fa-solid fa-phone m-2"></i>Líneas
+                            <i class="fa-solid fa-phone me-2"></i>Líneas
                         </a>
                         <div class="border-top my-2 nav-item"></div>  
                         <a class="btn btn-primary text-center" href="{{ url('/plataformas') }}">
-                            <i class="fa-solid fa-tower-cell m-2"></i>Adm. de Plataformas
+                            <i class="fa-solid fa-tower-cell me-2"></i>Adm. de Plataformas
                         </a>
                         <a class="btn btn-primary text-center" href="{{ url('/ubicaciones') }}">
-                            <i class="fa-solid fa-ethernet m-2"></i>Adm. de Ubicaciones
+                            <i class="fa-solid fa-ethernet me-2"></i>Adm. de Ubicaciones
                         </a>
                         <a class="btn btn-primary text-center" href="{{ url('/localidades') }}">
-                            <i class="fa-regular fa-building m-2"></i>Adm. de Localidades
+                            <i class="fa-regular fa-building me-2"></i>Adm. de Localidades
                         </a>
                         <!--
                         <a class="btn btn-primary text-center" href="{{ url('/pisos') }}">
-                            <i class="fa-solid fa-elevator m-2"></i>Adm. de Pisos
+                            <i class="fa-solid fa-elevator me-2"></i>Adm. de Pisos
                         </a>
                         -->
                         <a class="btn btn-primary text-center" href="{{ url('/usuarios') }}">
-                            <i class="fa-solid fa-person m-2"></i>Adm. de Usuarios
+                            <i class="fa-solid fa-person me-2"></i>Adm. de Usuarios
                         </a>
                         <div class="border-top my-2 nav-item"></div>                    
                         <a class="btn btn-primary text-center" href="{{ url('/roles') }}">
-                            <i class="fa-solid fa-address-card m-2"></i>Adm. de Roles
+                            <i class="fa-solid fa-address-card me-2"></i>Adm. de Roles
                         </a>
                         <a class="btn btn-primary text-center" href="{{ url('/permisos') }}">
-                            <i class="fa-solid fa-list-check m-2"></i>Adm. de Permisos
+                            <i class="fa-solid fa-list-check me-2"></i>Adm. de Permisos
                         </a>
-                    </div>
-                    <div class="mt-auto text-center py-3">
+                        <div class="border-top my-2 nav-item"></div>
                         @guest
-                            <div class="d-grid gap-2 px-3">
-                                <a href="{{ route('login') }}" class="btn btn-primary">
+                            <div class="d-grid gap-2">
+                                <a href="{{ route('login') }}" class="btn btn-outline-secondary">
                                     <i class="fa-solid fa-right-to-bracket"></i> Ingresar
                                 </a>
                                 @if (Route::has('register'))
@@ -73,8 +72,8 @@
                                 @endif
                             </div>
                         @else
-                            <div class="dropdown dropup px-3 w-100">
-                                <a class="btn btn-secondary w-100 dropdown-toggle text-start" href="#" role="button" id="sidebarUserMenu" data-bs-toggle="dropdown" aria-expanded="false">
+                            <div class="dropdown dropdown w-100">
+                                <a class="btn btn-outline-secondary w-100 dropdown-toggle" href="#" role="button" id="sidebarUserMenu" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="fa-solid fa-user me-2"></i> {{ Auth::user()->name }}
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="sidebarUserMenu">
@@ -92,10 +91,10 @@
                                 </ul>
                             </div>
                         @endguest
-                        <div class="mt-3">
-                            <img src="{{ asset('imagenes/logo_cantv.png') }}" alt="Logo CANTV" class="img-fluid logo-footer m-3" style="width: 40%;">
-                            <img src="{{ asset('imagenes/logo_uneti.png') }}" alt="Logo Uneti" class="img-fluid logo-footer m-3" style="width: 40%;">
-                        </div>
+                    </div>
+                    <div class="mt-3 d-flex justify-content-evenly align-items-center">
+                        <img src="{{ asset('imagenes/logo_cantv.png') }}" alt="Logo CANTV" class="img-fluid logo-footer m-3" style="width: 40%;">
+                        <img src="{{ asset('imagenes/logo_uneti.png') }}" alt="Logo Uneti" class="img-fluid logo-footer m-3" style="width: 40%;">
                     </div>
                 </div>
             </nav>
