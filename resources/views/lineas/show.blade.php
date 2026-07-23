@@ -43,4 +43,50 @@
     </div>
 </div>
 
+@if($activities->isNotEmpty())
+<div class="card mt-4">
+    <div class="card-header bg-dark text-white">
+        <h5 class="mb-0"><i class="fa-solid fa-clock-rotate-left me-2"></i>Historial de cambios</h5>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-sm align-middle">
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Usuario</th>
+                        <th>Acción</th>
+                        <th>Detalles</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($activities as $activity)
+                        <tr>
+                            <td>{{ $activity->created_at->format('d/m/Y H:i') }}</td>
+                            <td>{{ $activity->causer?->name ?? 'Sistema' }}</td>
+                            <td>{{ $activity->description }}</td>
+                            <td>
+                                @php $changes = $activity->changes ?? []; @endphp
+                                @if(!empty($changes['old']) && !empty($changes['attributes']))
+                                    <ul class="mb-0 ps-3">
+                                        @foreach($changes['attributes'] as $field => $newValue)
+                                            <li>
+                                                <strong>{{ str_replace('_', ' ', $field) }}:</strong>
+                                                {{ $changes['old'][$field] ?? 'Sin valor' }} → {{ $newValue ?? 'Sin valor' }}
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                @else
+                                    <span class="text-muted">Sin detalles</span>
+                                @endif
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@endif
+
 @endsection

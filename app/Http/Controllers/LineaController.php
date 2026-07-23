@@ -40,8 +40,9 @@ class LineaController extends Controller
     public function show(Linea $linea)
     {
         $linea->load(['ubicacion', 'localidad']);
+        $activities = $linea->activities()->with('causer')->latest()->get();
 
-        return view('lineas.show', compact('linea'));
+        return view('lineas.show', compact('linea', 'activities'));
     }
 
     public function edit(Linea $linea)
