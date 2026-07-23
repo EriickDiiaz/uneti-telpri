@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LineaController;
 use App\Http\Controllers\PlataformaController;
 use App\Http\Controllers\UbicacionController;
@@ -12,9 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function () {
-    Route::get('/', function () {
-        return view('home');
-    });
+    Route::get('/', [HomeController::class, 'index'])->name('home.root');
 
     Route::resource('/lineas', LineaController::class);
     Route::resource('/plataformas', PlataformaController::class);
@@ -25,7 +24,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('/roles', RolController::class);
     Route::resource('/permisos', PermisoController::class);
 
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
 });
 
 Auth::routes(['register' => false, 'reset' => false]);

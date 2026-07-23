@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Linea;
-use App\Models\Plataforma;
-use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
@@ -25,34 +23,36 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $lineas = Linea::query()
+            ->select(['plataforma', 'estado'])
+            ->get();
+
         $totales = [
-            'total' => Linea::count(),
+            'total' => $lineas->count(),
         ];
 
-        $totalesPorPlataforma = Plataforma::withCount('lineas')
-            ->orderBy('nombre')
-            ->get()
-            ->map(function ($plataforma) {
-                return [
-                    'nombre' => $plataforma->nombre,
-                    'total' => $plataforma->lineas_count,
-                ];
-            });
+        $lineasPorPlataforma = $lineas->groupBy(fn ($linea) => $linea->plataforma ?: 'Sin plataforma');
 
-        $resumen = Linea::with('plataforma')
-            ->get()
-            ->groupBy(function ($linea) {
-                return $linea->plataforma ? $linea->plataforma->nombre : 'Sin plataforma';
-            })
-            ->flatMap(function ($lineas, $plataforma) {
-                return $lineas->groupBy('estado')->map(function ($estadoLineas, $estado) {
-                    return [
+        $totalesPorPlataforma = $lineasPorPlataforma
+            ->map(fn ($items, $nombre) => [
+                'nombre' => $nombre,
+                'total' => $items->count(),
+            ])
+            ->sortBy('nombre')
+            ->values();
+
+        $resumen = $lineasPorPlataforma
+            ->map(function ($items, $plataforma) {
+                return $items->groupBy('estado')
+                    ->map(fn ($estadoItems, $estado) => [
                         'plataforma' => $plataforma,
                         'estado' => $estado,
-                        'total' => $estadoLineas->count(),
-                    ];
-                })->sortBy('estado')->values();
+                        'total' => $estadoItems->count(),
+                    ])
+                    ->sortBy('estado')
+                    ->values();
             })
+            ->flatten(1)
             ->sortBy(['plataforma', 'estado'])
             ->values();
 

@@ -12,6 +12,6 @@ class Plataforma extends Model
 
     public function lineas()
     {
-        return $this->hasMany(Linea::class);
+        return $this->hasMany(Linea::class, 'plataforma', 'nombre');
     }
 }
