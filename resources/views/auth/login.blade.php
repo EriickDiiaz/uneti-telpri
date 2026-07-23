@@ -27,7 +27,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="align-items-center card mt-5 p-4 shadow-sm">
+            <div class="align-items-center mt-5 p-4">
                 <div class="text-center m-2">
                     <img src="{{ asset('imagenes/logo_telpri.png') }}" alt="Logo Telpri" class="img-fluid mb-3" style="max-height: 80px;">
                     <h4 class="mb-0">Iniciar Sesión</h4>

@@ -1,6 +1,6 @@
 @extends('layouts.template')
 
-@section('title','TelPri - Detalle de Localidad')
+@section('title','TelPri - Lineas')
 @section('contenido')
 
 <!-- Mensajes y Notificaciones -->
@@ -14,48 +14,61 @@
 
 <!-- Titulo de la Sección -->
 <div class="d-flex">
-    <h2><i class="fa-regular fa-building m-2"></i>Localidad: {{ $localidad->nombre }}</h2>
+    <h2><i class="fa-solid fa-phone m-2"></i>Administrador de Líneas.</h2>
 </div>
 
 <!-- Botones -->
+@can('Crear Lineas')
+<div class="d-flex justify-content-between mb-2">
+    <div>
+        <a href="{{ route('lineas.create') }}" class="btn btn-outline-success btn-sm">
+            <i class="fa-solid fa-plus m-2"></i>Agregar Línea
+        </a>
+    </div>
+</div>
+@endcan
+
+<!-- Resumen de Líneas -->
 <div class="d-flex mb-2">
-    <a href="{{ route('localidades.index') }}" class="btn btn-outline-danger">
-        <i class="fa-solid fa-arrow-left"></i> Volver a Localidades
-    </a>
-    @can('Crear Pisos')
-    <a href="{{ route('pisos.create') }}" class="btn btn-outline-success btn-sm me-2">
-        <i class="fa-solid fa-plus m-2"></i>Agregar Piso
-    </a>
-    @endcan
+    <div class="align-items-center me-2">
+        <button class="btn btn-outline-primary">
+            Total Líneas:
+            <span class="badge bg-primary">{{ $lineas->count() }}</span>
+        </button>
+    </div>
 </div>
 
 <!-- Contenido de Sección -->
-<h5 class="card-title">Resumen de Localidad</h5>
-<p class="card-text"><strong>ID:</strong> {{ $localidad->id }}</p>
-<p class="card-text"><strong>Nombre:</strong> {{ $localidad->nombre }}</p>
-<p class="card-text"><strong>Pisos asociados:</strong> {{ $localidad->pisos->count() }}</p>
-
-<table class="table table-striped" id="datatablePisos">
+<table class="table table-striped" id="datatableLineas">
     <thead>
         <tr>
-            <th>ID</th>
-            <th>Nombre</th>
+            <th>Línea</th> 
+            <th>Plataforma</th>
+            <th>Estado</th>
+            <th>Titular</th>
+            <th>Inventario</th>
             <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
-        @forelse ($localidad->pisos as $piso)
+        @foreach ($lineas as $linea)
         <tr>
-            <td>{{ $piso->id }}</td>
-            <td>{{ $piso->nombre }}</td>
+            <td>{{ $linea->linea }}</td>
+            <td>{{ $linea->plataforma }}</td>
+            <td>{{ $linea->estado }}</td>
+            <td>{{ $linea->titular }}</td>
+            <td>{{ $linea->inventario }}</td>
             <td>
-                @can('Editar Pisos')
-                <a href="{{ route('pisos.edit', $piso->id) }}" class="btn btn-outline-primary btn-sm">
+                <a href="{{ route('lineas.show', $linea->id) }}" class="btn btn-outline-dark btn-sm">
+                    <i class="fa-solid fa-eye"></i>
+                </a>
+                @can('Editar Lineas')
+                <a href="{{ route('lineas.edit', $linea->id) }}" class="btn btn-outline-primary btn-sm">
                     <i class="fa-solid fa-pen-to-square"></i>
                 </a>
                 @endcan
-                @can('Eliminar Pisos')
-                <form action="{{ route('pisos.destroy', $piso->id) }}" id="form-eliminar-{{ $piso->id }}" class="d-inline" method="POST">
+                @can('Eliminar Lineas')
+                <form action="{{ route('lineas.destroy', $linea->id) }}" id="form-eliminar-{{ $linea->id }}" class="d-inline" method="POST">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-outline-danger btn-sm">
@@ -65,11 +78,7 @@
                 @endcan
             </td>
         </tr>
-        @empty
-        <tr>
-            <td colspan="3">No hay pisos asociados a esta localidad. ¡Agrega uno!</td>
-        </tr>
-        @endforelse
+        @endforeach
     </tbody>
 </table>
 
@@ -78,7 +87,7 @@
 @push('scripts')
 <script>
     $(document).ready(function() {
-        initializeDataTable('#datatablePisos', {
+        initializeDataTable('#datatableLineas', {
             // Add any specific options for this table
         });
 

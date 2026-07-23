@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LineaController;
 use App\Http\Controllers\PlataformaController;
 use App\Http\Controllers\UbicacionController;
 use App\Http\Controllers\LocalidadController;
@@ -12,9 +13,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function () {
     Route::get('/', function () {
-        return view('welcome');
+        return view('home');
     });
 
+    Route::resource('/lineas', LineaController::class);
     Route::resource('/plataformas', PlataformaController::class);
     Route::resource('/usuarios', UsuarioController::class);
     Route::resource('/ubicaciones', UbicacionController::class)->parameters(['ubicaciones' => 'ubicacion']);

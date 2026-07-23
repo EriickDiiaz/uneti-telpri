@@ -1,0 +1,40 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('lineas', function (Blueprint $table) {
+            $table->id();
+            $table->string('linea', 10);
+            $table->string('plataforma', 20)->nullable();
+            $table->string('estado', 20);
+            $table->string('titular', 100)->nullable();
+            $table->string('inventario', 50)->nullable();
+            $table->string('serial', 50)->nullable();
+            $table->string('mac', 50)->nullable();
+            $table->foreignId('ubicacion_id')->nullable()->constrained('ubicaciones')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('par', 4)->nullable();
+            $table->foreignId('localidad_id')->nullable()->constrained('localidades')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('piso_id', 15)->nullable();
+            $table->json('acceso')->nullable();
+            $table->string('observacion', 255)->nullable();
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('lineas');
+    }
+};
