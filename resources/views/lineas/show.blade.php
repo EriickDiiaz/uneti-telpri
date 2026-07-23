@@ -56,26 +56,44 @@
                         <th>Fecha</th>
                         <th>Usuario</th>
                         <th>Acción</th>
-                        <th>Detalles</th>
+                        <th>Detalle</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($activities as $activity)
+                        @php
+                            $activityChanges = $activity->attribute_changes ?? $activity->properties ?? collect();
+                            $rawChanges = [];
+                            $oldValues = [];
+
+                            if ($activityChanges instanceof \Illuminate\Support\Collection) {
+                                $activityChanges = $activityChanges->toArray();
+                            }
+
+                            if (is_array($activityChanges)) {
+                                if (isset($activityChanges['attributes']) && is_array($activityChanges['attributes'])) {
+                                    $rawChanges = $activityChanges['attributes'];
+                                } elseif (isset($activityChanges['old']) && is_array($activityChanges['old'])) {
+                                    $oldValues = $activityChanges['old'];
+                                }
+
+                                if (isset($activityChanges['old']) && is_array($activityChanges['old']) && isset($activityChanges['attributes']) && is_array($activityChanges['attributes'])) {
+                                    $oldValues = $activityChanges['old'];
+                                    $rawChanges = $activityChanges['attributes'];
+                                }
+                            }
+
+                            $hasDetails = !empty($rawChanges) || !empty($oldValues);
+                        @endphp
                         <tr>
-                            <td>{{ $activity->created_at->format('d/m/Y H:i') }}</td>
+                            <td>{{ \Carbon\Carbon::parse($activity->created_at)->format('d/m/Y H:i') }}</td>
                             <td>{{ $activity->causer?->name ?? 'Sistema' }}</td>
                             <td>{{ $activity->description }}</td>
                             <td>
-                                @php $changes = $activity->changes ?? []; @endphp
-                                @if(!empty($changes['old']) && !empty($changes['attributes']))
-                                    <ul class="mb-0 ps-3">
-                                        @foreach($changes['attributes'] as $field => $newValue)
-                                            <li>
-                                                <strong>{{ str_replace('_', ' ', $field) }}:</strong>
-                                                {{ $changes['old'][$field] ?? 'Sin valor' }} → {{ $newValue ?? 'Sin valor' }}
-                                            </li>
-                                        @endforeach
-                                    </ul>
+                                @if($hasDetails)
+                                    <button type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#activityModal{{ $activity->id }}">
+                                        <i class="fa-solid fa-eye m-2"></i>
+                                    </button>
                                 @else
                                     <span class="text-muted">Sin detalles</span>
                                 @endif
@@ -87,6 +105,65 @@
         </div>
     </div>
 </div>
+
+@foreach($activities as $activity)
+    @php
+        $activityChanges = $activity->attribute_changes ?? $activity->properties ?? collect();
+        $rawChanges = [];
+        $oldValues = [];
+
+        if ($activityChanges instanceof \Illuminate\Support\Collection) {
+            $activityChanges = $activityChanges->toArray();
+        }
+
+        if (is_array($activityChanges)) {
+            if (isset($activityChanges['attributes']) && is_array($activityChanges['attributes'])) {
+                $rawChanges = $activityChanges['attributes'];
+            }
+            if (isset($activityChanges['old']) && is_array($activityChanges['old'])) {
+                $oldValues = $activityChanges['old'];
+            }
+            if (isset($activityChanges['old']) && is_array($activityChanges['old']) && isset($activityChanges['attributes']) && is_array($activityChanges['attributes'])) {
+                $oldValues = $activityChanges['old'];
+                $rawChanges = $activityChanges['attributes'];
+            }
+        }
+
+        $hasDetails = !empty($rawChanges) || !empty($oldValues);
+    @endphp
+    <div class="modal fade" id="activityModal{{ $activity->id }}" tabindex="-1" aria-labelledby="activityModalLabel{{ $activity->id }}" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="activityModalLabel{{ $activity->id }}">Detalles del cambio</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="mb-3"><strong>Fecha:</strong> {{ \Carbon\Carbon::parse($activity->created_at)->format('d/m/Y H:i') }}</p>
+                    <p class="mb-3"><strong>Usuario:</strong> {{ $activity->causer?->name ?? 'Sistema' }}</p>
+                    <p class="mb-3"><strong>Acción:</strong> {{ $activity->description }}</p>
+
+                    @if($hasDetails)
+                        <ul class="list-group">
+                            @foreach($rawChanges as $field => $newValue)
+                                <li class="list-group-item">
+                                    <div class="fw-bold text-capitalize">{{ str_replace('_', ' ', $field) }}</div>
+                                    <div><span class="text-muted">Anterior:</span> {{ $oldValues[$field] ?? 'Sin valor' }}</div>
+                                    <div><span class="text-muted">Nuevo:</span> {{ $newValue ?? 'Sin valor' }}</div>
+                                </li>
+                            @endforeach
+                        </ul>
+                    @else
+                        <div class="alert alert-secondary mb-0">No hay detalles disponibles para este cambio.</div>
+                    @endif
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+@endforeach
 @endif
 
 @endsection
