@@ -202,6 +202,12 @@
         localidadSelect.addEventListener('change', function () {
             cargarPisos(this.value);
         });
+
+        const element = document.getElementById('linea');
+        const maskOptions = {
+        mask: '0000000'
+        };
+        const mask = IMask(element, maskOptions);
     });
 </script>
 @endpush
