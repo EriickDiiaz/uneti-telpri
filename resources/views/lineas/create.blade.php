@@ -25,7 +25,7 @@
     
     <div class="col-sm-6">
         <label for="linea" class="col-form-label">Línea:</label>
-        <input type="text" class="form-control" name="linea" id="linea" value="{{ old('linea') }}" required>
+        <input type="text" class="form-control" name="linea" id="linea" value="{{ old('linea') }}" inputmode="numeric" maxlength="9" required>
     </div>
 
     <div class="col-sm-6 d-flex justify-content-between">
@@ -49,14 +49,6 @@
                 <option value="Por Verificar" {{ old('estado') == 'Por Verificar' ? 'selected' : '' }}>Por Verificar</option>
                 <option value="Por Eliminar" {{ old('estado') == 'Por Eliminar' ? 'selected' : '' }}>Por Eliminar</option>
             </select>
-        </div>
-    </div>
-
-    <div class="col-sm-6 d-flex justify-content-between">
-        <div class="col-sm-5">
-        </div>
-
-        <div class="col-sm-5">
         </div>
     </div>
 
@@ -95,7 +87,7 @@
 
         <div class="col-sm-5">
             <label for="par" class="col-form-label">Par:</label>
-            <input type="text" class="form-control" name="par" id="par" value="{{ old('par') }}">
+            <input type="text" class="form-control" name="par" id="par" value="{{ old('par') }}" inputmode="numeric" maxlength="4">
         </div>
     </div>
 
@@ -203,11 +195,21 @@
             cargarPisos(this.value);
         });
 
-        const element = document.getElementById('linea');
-        const maskOptions = {
-        mask: '0000000'
-        };
-        const mask = IMask(element, maskOptions);
+        const lineaElement = document.getElementById('linea');
+        if (lineaElement && window.IMask) {
+            IMask(lineaElement, {
+                mask: /^\d{0,9}$/,
+                lazy: false,
+            });
+        }
+
+        const parElement = document.getElementById('par');
+        if (parElement && window.IMask) {
+            IMask(parElement, {
+                mask: /^\d{0,4}$/,
+                lazy: false,
+            });
+        }
     });
 </script>
 @endpush
