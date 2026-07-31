@@ -44,6 +44,34 @@
 </div>
 
 @if($activities->isNotEmpty())
+@php
+    $formatActivityValue = function ($field, $value) {
+        if ($value === null || $value === '') {
+            return 'Sin valor';
+        }
+
+        $relationshipMap = [
+            'localidad_id' => ['class' => \App\Models\Localidad::class, 'attribute' => 'nombre'],
+            'piso_id' => ['class' => \App\Models\Piso::class, 'attribute' => 'nombre'],
+            'ubicacion_id' => ['class' => \App\Models\Ubicacion::class, 'attribute' => 'nombre'],
+        ];
+
+        if (isset($relationshipMap[$field])) {
+            $modelClass = $relationshipMap[$field]['class'];
+            $record = $modelClass::find($value);
+
+            if ($record) {
+                return $record->{$relationshipMap[$field]['attribute']} ?? $value;
+            }
+        }
+
+        if (is_array($value)) {
+            return json_encode($value);
+        }
+
+        return $value;
+    };
+@endphp
 <div class="card mt-4">
     <div class="card-header bg-dark text-white">
         <h5 class="mb-0"><i class="fa-solid fa-clock-rotate-left me-2"></i>Historial de cambios</h5>
@@ -148,8 +176,8 @@
                             @foreach($rawChanges as $field => $newValue)
                                 <li class="list-group-item">
                                     <div class="fw-bold text-capitalize">{{ str_replace('_', ' ', $field) }}</div>
-                                    <div><span class="text-muted">Anterior:</span> {{ $oldValues[$field] ?? 'Sin valor' }}</div>
-                                    <div><span class="text-muted">Nuevo:</span> {{ $newValue ?? 'Sin valor' }}</div>
+                                    <div><span class="text-muted">Anterior:</span> {{ $formatActivityValue($field, $oldValues[$field] ?? null) }}</div>
+                                    <div><span class="text-muted">Nuevo:</span> {{ $formatActivityValue($field, $newValue ?? null) }}</div>
                                 </li>
                             @endforeach
                         </ul>
