@@ -78,7 +78,7 @@
     <div class="col-sm-6 d-flex justify-content-between">
         <div class="col-sm-5">
             <label for="ubicacion" class="col-form-label">Ubicación:</label>
-            <select class="form-select" name="ubicacion_id" id="ubicacion_id">
+            <select class="form-select select2" name="ubicacion_id" id="ubicacion_id">
                 <option value="">Seleccione una ubicación</option>
                 @foreach($ubicaciones as $ubicacion)
                     <option value="{{ $ubicacion->id }}" {{ old('ubicacion_id', $linea->ubicacion_id) == $ubicacion->id ? 'selected' : '' }}>{{ $ubicacion->nombre }}</option>
@@ -95,7 +95,7 @@
     <div class="col-sm-6 d-flex justify-content-between">
         <div class="col-sm-5">
             <label for="localidad" class="col-form-label">Localidad:</label>
-            <select class="form-select" name="localidad_id" id="localidad_id">
+            <select class="form-select select2" name="localidad_id" id="localidad_id">
                 <option value="">Seleccione una localidad</option>
                 @foreach($localidades as $localidad)
                     <option value="{{ $localidad->id }}" {{ old('localidad_id', $linea->localidad_id) == $localidad->id ? 'selected' : '' }}>{{ $localidad->nombre }}</option>
@@ -224,6 +224,17 @@
                 lazy: false,
             });
         }
+
+        $(document).ready(function() {
+            $('.select2').select2({
+                theme: 'bootstrap-5',
+                width: '100%'
+            });
+
+            $('#localidad_id').on('select2:select change', function () {
+                cargarPisos(this.value);
+            });
+        });
     });
 </script>
 @endpush
