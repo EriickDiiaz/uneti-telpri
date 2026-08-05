@@ -67,9 +67,11 @@
                         <a class="btn btn-primary text-center" href="{{ url('/roles') }}">
                             <i class="fa-solid fa-address-card me-2"></i>Adm. de Roles
                         </a>
+                        <!--
                         <a class="btn btn-primary text-center" href="{{ url('/permisos') }}">
                             <i class="fa-solid fa-list-check me-2"></i>Adm. de Permisos
                         </a>
+                        -->
                         <div class="border-top my-2 nav-item"></div>
                         @endcan
                         @guest
