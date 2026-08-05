@@ -25,7 +25,7 @@
     
     <div class="col-sm-6">
         <label for="linea" class="col-form-label">Línea:</label>
-        <input type="text" class="form-control" name="linea" id="linea" value="{{ old('linea') }}" required>
+        <input type="text" class="form-control" name="linea" id="linea" value="{{ old('linea') }}" inputmode="numeric" maxlength="9" required>
     </div>
 
     <div class="col-sm-6 d-flex justify-content-between">
@@ -49,14 +49,6 @@
                 <option value="Por Verificar" {{ old('estado') == 'Por Verificar' ? 'selected' : '' }}>Por Verificar</option>
                 <option value="Por Eliminar" {{ old('estado') == 'Por Eliminar' ? 'selected' : '' }}>Por Eliminar</option>
             </select>
-        </div>
-    </div>
-
-    <div class="col-sm-6 d-flex justify-content-between">
-        <div class="col-sm-5">
-        </div>
-
-        <div class="col-sm-5">
         </div>
     </div>
 
@@ -85,7 +77,7 @@
     <div class="col-sm-6 d-flex justify-content-between">
         <div class="col-sm-5">
             <label for="ubicacion" class="col-form-label">Ubicación:</label>
-            <select class="form-select" name="ubicacion_id" id="ubicacion_id">
+            <select class="form-select select2" name="ubicacion_id" id="ubicacion_id">
                 <option value="">Seleccione una ubicación</option>
                 @foreach($ubicaciones as $ubicacion)
                     <option value="{{ $ubicacion->id }}" {{ old('ubicacion_id') == $ubicacion->id ? 'selected' : '' }}>{{ $ubicacion->nombre }}</option>
@@ -95,14 +87,14 @@
 
         <div class="col-sm-5">
             <label for="par" class="col-form-label">Par:</label>
-            <input type="text" class="form-control" name="par" id="par" value="{{ old('par') }}">
+            <input type="text" class="form-control" name="par" id="par" value="{{ old('par') }}" inputmode="numeric" maxlength="4">
         </div>
     </div>
 
     <div class="col-sm-6 d-flex justify-content-between">
         <div class="col-sm-5">
             <label for="localidad" class="col-form-label">Localidad:</label>
-            <select class="form-select" name="localidad_id" id="localidad_id">
+            <select class="form-select select2" name="localidad_id" id="localidad_id">
                 <option value="">Seleccione una localidad</option>
                 @foreach($localidades as $localidad)
                     <option value="{{ $localidad->id }}" {{ old('localidad_id') == $localidad->id ? 'selected' : '' }}>{{ $localidad->nombre }}</option>
@@ -202,6 +194,34 @@
         localidadSelect.addEventListener('change', function () {
             cargarPisos(this.value);
         });
+
+        const lineaElement = document.getElementById('linea');
+        if (lineaElement && window.IMask) {
+            IMask(lineaElement, {
+                mask: /^\d{0,9}$/,
+                lazy: false,
+            });
+        }
+
+        const parElement = document.getElementById('par');
+        if (parElement && window.IMask) {
+            IMask(parElement, {
+                mask: /^\d{0,4}$/,
+                lazy: false,
+            });
+        }
+
+        $(document).ready(function() {
+            $('.select2').select2({
+                theme: 'bootstrap-5',
+                width: '100%'
+            });
+
+            $('#localidad_id').on('select2:select change', function () {
+                cargarPisos(this.value);
+            });
+        });
     });
+    
 </script>
 @endpush
