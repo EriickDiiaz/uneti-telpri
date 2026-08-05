@@ -25,11 +25,6 @@
             <i class="fa-solid fa-plus m-2"></i>Agregar Localidad
         </a>
         @endcan
-        @can('Crear Pisos')
-        <a href="{{ route('pisos.create') }}" class="btn btn-outline-success btn-sm me-2">
-            <i class="fa-solid fa-plus m-2"></i>Agregar Piso
-        </a>
-        @endcan
     </div>
 </div>
 
@@ -57,9 +52,14 @@
         @foreach ($localidades as $localidad)
         <tr>
             <td>{{ $localidad->id }}</td>
-            <td>{{ $localidad->nombre }}
+            <td>{{ $localidad->nombre }}</td>
             <td>{{ $localidad->pisos_count }}</td>
             <td>
+                @can('Crear Pisos')
+                <a href="{{ route('pisos.create', $localidad->id) }}" class="btn btn-outline-info btn-sm">
+                    <i class="fa-solid fa-elevator"></i>
+                </a>
+                @endcan
                 <a href="{{ route('localidades.show', $localidad->id) }}" class="btn btn-outline-dark btn-sm">
                     <i class="fa-solid fa-eye"></i>
                 </a>
