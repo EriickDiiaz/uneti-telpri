@@ -14,10 +14,12 @@ class PisoController extends Controller
         return view('pisos.index', compact('pisos'));
     }
 
-    public function create()
+    public function create(Request $request)
     {
         $localidades = Localidad::all();
-        return view('pisos.create', compact('localidades'));
+        $selectedLocalidadId = $request->query('localidad_id');
+
+        return view('pisos.create', compact('localidades', 'selectedLocalidadId'));
     }
 
     public function store(Request $request)

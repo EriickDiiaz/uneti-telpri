@@ -56,7 +56,7 @@
             <td>{{ $localidad->pisos_count }}</td>
             <td>
                 @can('Crear Pisos')
-                <a href="{{ route('pisos.create', $localidad->id) }}" class="btn btn-outline-info btn-sm">
+                <a href="{{ route('pisos.create', ['localidad_id' => $localidad->id]) }}" class="btn btn-outline-info btn-sm">
                     <i class="fa-solid fa-elevator"></i>
                 </a>
                 @endcan

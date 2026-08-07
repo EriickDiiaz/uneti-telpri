@@ -32,10 +32,10 @@
 
         <label for="localidad_id" class="col-sm-2 col-form-label">Localidad:</label>
         <div class="col-sm-5">
-            <select class="form-control" name="localidad_id" id="localidad_id" required>
+            <select class="form-select select2" name="localidad_id" id="localidad_id" required>
                 <option value="">Seleccionar Localidad</option>
                 @foreach($localidades as $localidad)
-                    <option value="{{ $localidad->id }}" {{ old('localidad_id') == $localidad->id ? 'selected' : '' }}>
+                    <option value="{{ $localidad->id }}" {{ old('localidad_id', $selectedLocalidadId ?? '') == $localidad->id ? 'selected' : '' }}>
                         {{ $localidad->nombre }}
                     </option>
                 @endforeach
@@ -59,3 +59,14 @@
 </form>
 
 @endsection
+
+@push('scripts')
+<script>
+    $(document).ready(function() {
+        $('.select2').select2({
+            theme: 'bootstrap-5',
+            width: '100%'
+        });
+    });
+</script>
+@endpush

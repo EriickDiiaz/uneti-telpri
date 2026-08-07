@@ -19,12 +19,12 @@
 
 <!-- Botones -->
 <div class="d-flex mb-2">
-    <a href="{{ route('localidades.index') }}" class="btn btn-outline-danger">
-        <i class="fa-solid fa-arrow-left"></i> Volver a Localidades
+    <a href="{{ route('localidades.index') }}" class="btn btn-outline-danger me-2">
+        <i class="fa-solid fa-arrow-left me-2"></i>Volver a Localidades
     </a>
     @can('Crear Pisos')
-    <a href="{{ route('pisos.create') }}" class="btn btn-outline-success btn-sm me-2">
-        <i class="fa-solid fa-plus m-2"></i>Agregar Piso
+    <a href="{{ route('pisos.create', ['localidad_id' => $localidad->id]) }}" class="btn btn-outline-success me-2">
+        <i class="fa-solid fa-plus me-2"></i>Agregar Piso
     </a>
     @endcan
 </div>
