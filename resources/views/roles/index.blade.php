@@ -42,7 +42,6 @@
 <table class="table table-striped" id="datatableRoles">
     <thead>
         <tr>
-            <th>ID</th>            
             <th>Nombre</th>
             <th>Permisos</th>
             <th>Acciones</th>
@@ -51,7 +50,6 @@
     <tbody>
         @foreach ($roles as $rol)
         <tr>
-            <td>{{ $rol->id }}</td>
             <td>{{ $rol->name }}</td>
             <td>{{ $rol->permissions_count }}</td>
             <td>

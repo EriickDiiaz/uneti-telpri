@@ -41,7 +41,6 @@
 <table class="table table-striped" id="datatablePermisos">
     <thead>
         <tr>
-            <th>ID</th>            
             <th>Nombre</th>
             <th>Roles</th>
             <th>Acciones</th>
@@ -50,7 +49,6 @@
     <tbody>
         @foreach ($permisos as $permiso)
         <tr>
-            <td>{{ $permiso->id }}</td>
             <td>{{ $permiso->name }}</td>
             <td>
                 @foreach ($permiso->roles as $role)

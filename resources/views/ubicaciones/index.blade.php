@@ -42,7 +42,6 @@
 <table class="table table-striped" id="datatableUbicaciones">
     <thead>
         <tr>
-            <th>ID</th>            
             <th>Nombre</th>
             <th>Descripción</th>
             <th>Acciones</th>
@@ -51,7 +50,6 @@
     <tbody>
         @foreach ($ubicaciones as $ubicacion)
         <tr>
-            <td>{{ $ubicacion->id }}</td>
             <td>{{ $ubicacion->nombre }}</td>
             <td>{{ $ubicacion->descripcion }}</td>
             <td>

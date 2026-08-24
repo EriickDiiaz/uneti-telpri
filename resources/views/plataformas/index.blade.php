@@ -42,7 +42,6 @@
 <table class="table table-striped" id="datatablePlataformas">
     <thead>
         <tr>
-            <th>ID</th>            
             <th>Nombre</th>
             <th>Acciones</th>
         </tr>
@@ -50,7 +49,6 @@
     <tbody>
         @foreach ($plataformas as $plataforma)
         <tr>
-            <td>{{ $plataforma->id }}</td>
             <td>{{ $plataforma->nombre }}</td>
             <td>
                 @can('Editar Plataformas')
