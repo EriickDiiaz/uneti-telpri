@@ -26,7 +26,7 @@
     <div class="container-fluid">
         <div class="row">
             <!-- Sidebar -->
-            <nav class="sidebar col-md-3 col-lg-2 my-2 bg-body-secondary rounded">
+            <nav class="sidebar position-fixed col-md-3 col-lg-2 bg-body-secondary rounded min-vh-100 p-3">
                 <div class="d-flex flex-column h-100">
                     <div class="d-grid gap-2 col-12 mx-auto ">
                         <a class="navbar-brand d-flex flex-column align-items-center" href="{{ url('/home') }}" style="height: 70px;">
